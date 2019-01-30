@@ -71,6 +71,9 @@ public class NutzJsonMessageConverter extends AbstractJsonHttpMessageConverter {
      */
     @Override
     protected Object readInternal(Type resolvedType, Reader reader) throws Exception {
+        if (String.class == resolvedType) {
+            return Streams.read(reader).toString();
+        }
         return Json.fromJson(resolvedType, reader);
     }
 
